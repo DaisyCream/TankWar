@@ -1,0 +1,11 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+#cannon{
+    margin: 0px auto;
+    background-color: aquamarine;
+    position: relative;
+}
