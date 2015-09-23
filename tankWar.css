@@ -5,7 +5,11 @@
 
 
 #cannon{
-    margin: 0px auto;
     background-color: aquamarine;
     position: relative;
+}
+
+.enemy{
+    background-color: blue;
+    position: absolute;
 }
