@@ -56,12 +56,12 @@ ENEMY.initPosition = function(target){
             target.style.top = 0 + 'px';
             break;
         case 2:
-            target.style.left = windowWidth + 'px';
+            target.style.left = (windowWidth-ENEMY.side) + 'px';
             target.style.top = ranChooseYLong + 'px'
             break;
         case 3:
             target.style.left = ranChooseXLong + 'px';
-            target.style.top = windowHeight + 'px';
+            target.style.top = (windowHeight-ENEMY.side) + 'px';
             break;
         case 4:
             target.style.left = 0 + 'px';
@@ -97,7 +97,7 @@ function createEnemy(){
     createStyle(enemy);
     ENEMY.initPosition(enemy);
     enemy.style.webkitTransition = 'top ' + ENEMY.moveSpeed(enemy) + 's' + ",left " + enemy.moveSpeed+'s';
-    setTimeout("addEnemyAnimation(enemy)",20);
+    setTimeout("addEnemyAnimation(enemy)",60);
     setTimeout(createEnemy, ENEMY.createTime());
 }
 
