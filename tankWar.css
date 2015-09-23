@@ -12,4 +12,5 @@
 .enemy {
     background-color: blue;
     position: absolute;
+    -webkit-transition-timing-function: linear;
 }
