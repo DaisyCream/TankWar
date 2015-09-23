@@ -97,7 +97,7 @@ function createEnemy(){
     createStyle(enemy);
     ENEMY.initPosition(enemy);
     enemy.style.webkitTransition = 'top ' + ENEMY.moveSpeed(enemy) + 's' + ",left " + enemy.moveSpeed+'s';
-    setTimeout("addEnemyAnimation(enemy)",5);
+    setTimeout("addEnemyAnimation(enemy)",20);
     setTimeout(createEnemy, ENEMY.createTime());
 }
 
