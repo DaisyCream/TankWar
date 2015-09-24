@@ -57,7 +57,7 @@ ENEMY.initPosition = function(target){
             break;
         case 2:
             target.style.left = (windowWidth-ENEMY.side) + 'px';
-            target.style.top = ranChooseYLong + 'px'
+            target.style.top = ranChooseYLong + 'px';
             break;
         case 3:
             target.style.left = ranChooseXLong + 'px';
@@ -97,11 +97,50 @@ function createEnemy(){
     createStyle(enemy);
     ENEMY.initPosition(enemy);
     enemy.style.webkitTransition = 'top ' + ENEMY.moveSpeed(enemy) + 's' + ",left " + enemy.moveSpeed+'s';
-    setTimeout("addEnemyAnimation(enemy)",60);
+    setTimeout("addEnemyAnimation(enemy)", 60);
     setTimeout(createEnemy, ENEMY.createTime());
 }
 
+/***************************cannon rotate*****************************/
+var CANNONMOVE = function(){};
+CANNONMOVE.addDeg = false;
+CANNONMOVE.deductDeg = false;
+CANNONMOVE.moveDeg = 0;
+
+CANNONMOVE.move = function(){
+    if(CANNONMOVE.addDeg==true) {
+        CANNONMOVE.moveDeg+=1;
+        cannon.style.transform = "rotate(" + CANNONMOVE.moveDeg +"deg)";
+    }
+    if(CANNONMOVE.deductDeg==true){
+        CANNONMOVE.moveDeg-=1;
+        cannon.style.transform = "rotate(" + CANNONMOVE.moveDeg +"deg)";
+    }
+};
+
+
+document.onkeydown = function(event){
+    event = event || window.event;
+    if(event.keyCode==37)   CANNONMOVE.deductDeg = true;
+    if(event.keyCode==39)   CANNONMOVE.addDeg = true;
+};
+
+document.onkeyup = function(event){
+    event = event || window.event;
+    if(event.keyCode==37)   CANNONMOVE.deductDeg = false;
+    if(event.keyCode==39)   CANNONMOVE.addDeg = false;
+};
+
+
+
+
+/***************************grame start*****************************/
+
+function gameStart(){
+    createEnemy();
+    setInterval(CANNONMOVE.move,15);
+};
 
 window.onload = function(){
-    createEnemy();
+    gameStart();
 };
