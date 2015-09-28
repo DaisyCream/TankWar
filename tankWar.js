@@ -40,12 +40,11 @@ ENEMY.moveSpeed = function(target){
 };
 
 
+
 /***
  * This function for enemy initPosition
  * @param target
  */
-
-
 ENEMY.initPosition = function(target){
     var ranChooseSide = parseInt(Math.random()*4)+1;
     var ranChooseXLong = parseInt(Math.random()*(windowWidth-ENEMY.side));
@@ -101,6 +100,43 @@ function createEnemy(){
     setTimeout(createEnemy, ENEMY.createTime());
 }
 
+
+/***
+ * the enemy face to cannon
+ */
+centerX = windowWidth/2;
+centerY = windowHeight/2;
+
+function faceToCannon(x,y){
+    var deg;
+    if(x<=centerX){
+        if(y<=centerY){
+            if(y==0) deg = 0;
+            else deg = 45;
+        }
+        else {
+            if(y==0) deg = 135;
+            else deg = 90;
+        }
+    }
+    else{
+        if(y<=centerY){
+            if(y==0) deg = 315;
+            else deg = 270;
+        }
+        else{
+            if(y==0) deg = 180;
+            else deg = 225;
+        }
+
+    }
+
+    var tan = Math.abs(centerY-y)/Math.abs(centerX-x);
+    deg += Math.atan(tan);
+    return deg;
+}
+
+
 /***************************cannon rotate*****************************/
 var CANNONMOVE = function(){};
 CANNONMOVE.addDeg = false;
@@ -130,6 +166,8 @@ document.onkeyup = function(event){
     if(event.keyCode==37)   CANNONMOVE.deductDeg = false;
     if(event.keyCode==39)   CANNONMOVE.addDeg = false;
 };
+
+
 
 
 
