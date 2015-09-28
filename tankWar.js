@@ -49,22 +49,31 @@ ENEMY.initPosition = function(target){
     var ranChooseSide = parseInt(Math.random()*4)+1;
     var ranChooseXLong = parseInt(Math.random()*(windowWidth-ENEMY.side));
     var ranChooseYLong = parseInt(Math.random()*(windowHeight-ENEMY.side));
+    var degree;
     switch (ranChooseSide){
         case 1:
             target.style.left = ranChooseXLong + 'px';
             target.style.top = 0 + 'px';
+            degree = faceToCannon(parseInt(target.style.left),parseInt(target.style.top));
+            target.style.transform = "rotate("+ degree + "deg)";
             break;
         case 2:
             target.style.left = (windowWidth-ENEMY.side) + 'px';
             target.style.top = ranChooseYLong + 'px';
+            degree = faceToCannon(parseInt(target.style.left),parseInt(target.style.top));
+            target.style.transform = "rotate("+ degree + "deg)";
             break;
         case 3:
             target.style.left = ranChooseXLong + 'px';
             target.style.top = (windowHeight-ENEMY.side) + 'px';
+            degree = faceToCannon(parseInt(target.style.left),parseInt(target.style.top));
+            target.style.transform = "rotate("+ degree + "deg)";
             break;
         case 4:
             target.style.left = 0 + 'px';
             target.style.top = ranChooseYLong + 'px';
+            degree = faceToCannon(parseInt(target.style.left),parseInt(target.style.top));
+            target.style.transform = "rotate("+ degree + "deg)";
             break;
     }
 
@@ -96,7 +105,7 @@ function createEnemy(){
     createStyle(enemy);
     ENEMY.initPosition(enemy);
     enemy.style.webkitTransition = 'top ' + ENEMY.moveSpeed(enemy) + 's' + ",left " + enemy.moveSpeed+'s';
-    setTimeout("addEnemyAnimation(enemy)", 60);
+    setTimeout("addEnemyAnimation(enemy)", 2000);
     setTimeout(createEnemy, ENEMY.createTime());
 }
 
@@ -111,29 +120,29 @@ function faceToCannon(x,y){
     var deg;
     if(x<=centerX){
         if(y<=centerY){
-            if(y==0) deg = 0;
-            else deg = 45;
+            if(y==0) deg = 270;
+            else deg = 270;
         }
         else {
-            if(y==0) deg = 135;
-            else deg = 90;
+            if(y==0) deg = 180;
+            else deg = 225;
         }
     }
     else{
         if(y<=centerY){
-            if(y==0) deg = 315;
-            else deg = 270;
+            if(y==0) deg = 0;
+            else deg = 45;
         }
         else{
-            if(y==0) deg = 180;
-            else deg = 225;
+            if(y==0) deg = 135;
+            else deg = 90;
         }
 
     }
-
-    var tan = Math.abs(centerY-y)/Math.abs(centerX-x);
-    deg += Math.atan(tan);
-    return deg;
+    var cos = Math.abs(centerY-y)/Math.sqrt(Math.pow((centerX-x),2)+Math.pow((centerY-y),2));
+    console.log(cos);
+    deg += Math.acos(cos)*180;
+    return parseInt(deg);
 }
 
 
@@ -166,10 +175,6 @@ document.onkeyup = function(event){
     if(event.keyCode==37)   CANNONMOVE.deductDeg = false;
     if(event.keyCode==39)   CANNONMOVE.addDeg = false;
 };
-
-
-
-
 
 
 /***************************grame start*****************************/

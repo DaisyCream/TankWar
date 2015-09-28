@@ -14,5 +14,5 @@
     background-color: blue;
     position: absolute;
     -webkit-transition-timing-function: linear;
-    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
 }
